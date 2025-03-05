@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predict | Breast Cancer Detection</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        .result-section {
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">🎗️ Breast Cancer Detection</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="/">🏠 Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/prevention">🛡 Prevention</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/causes">⚠️ Causes</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/hospitals">🏥 Hospitals</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/research">📚 Research</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/predict">📚 Predict</a></li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Prediction Form -->
+    <section id="predict" class="container text-center mt-5">
+        <h1 class="fw-bold">🔬 Breast Cancer Prediction</h1>
+        <p class="fs-5">Enter the required details below to predict the possibility of breast cancer.</p>
+        
+        <form action="/predict" method="post" class="p-4 border rounded bg-light">
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="mean_radius" class="form-label">Mean Radius</label>
+                    <input type="number" step="any" class="form-control" id="mean_radius" name="mean_radius" required>
+                </div>
+                <div class="col-md-6">
+                    <label for="mean_texture" class="form-label">Mean Texture</label>
+                    <input type="number" step="any" class="form-control" id="mean_texture" name="mean_texture" required>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-md-6">
+                    <label for="mean_perimeter" class="form-label">Mean Perimeter</label>
+                    <input type="number" step="any" class="form-control" id="mean_perimeter" name="mean_perimeter" required>
+                </div>
+                <div class="col-md-6">
+                    <label for="mean_area" class="form-label">Mean Area</label>
+                    <input type="number" step="any" class="form-control" id="mean_area" name="mean_area" required>
+                </div>
+            </div>
+            <div class="mt-4 text-center">
+                <button type="submit" class="btn btn-primary">🔍 Predict</button>
+            </div>
+        </form>
+        {% if prediction %}
+            <div class="result-section" style="color: red">
+                <h3>Prediction: {{ prediction }}</h3>
+                <p>Result Color: {{result_color}}</p>
+                <p>Suggestions: {{ suggestions }}</p>
+                <h4>Recommended Hospitals:</h4>
+                <ul>
+                    {% for hospital in recommended_hospitals %}
+                        <li>{{ hospital }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+    </section>
+
+    <!-- Footer -->
+    <footer class="text-center p-3 bg-dark text-white mt-4">
+        <p>&copy; 2025 Breast Cancer Detection. All Rights Reserved. 🎗️</p>
+    </footer>
+</body>
+</html>
